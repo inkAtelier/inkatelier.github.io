@@ -61,7 +61,7 @@
     </div>
 
     <div class="gallery-grid">
-      <div class="gallery-item" data-cat="wedding"><div class="wash"></div><div class="gallery-caption"><span class="cat">Live Wedding Painting</span><span class="title">First Look, Savannah</span></div></div>
+      <div class="gallery-item" data-cat="wedding"><img class="wash" src="images/1.jpg" alt="couple"><div class="gallery-caption"><span class="cat">Live Wedding Painting</span><span class="title">First Look, Savannah</span></div></div>
       <div class="gallery-item" data-cat="portrait"><div class="wash"></div><div class="gallery-caption"><span class="cat">Portrait Commission</span><span class="title">The Whitfield Family</span></div></div>
       <div class="gallery-item" data-cat="illustration"><div class="wash"></div><div class="gallery-caption"><span class="cat">Illustration</span><span class="title">Save-the-Date Suite</span></div></div>
       <div class="gallery-item" data-cat="wedding"><div class="wash"></div><div class="gallery-caption"><span class="cat">Live Wedding Painting</span><span class="title">Reception, Willow Barn</span></div></div>
@@ -161,7 +161,7 @@
         </div>
       </div>
 
-      <form id="contactForm" novalidate>
+<!--       <form id="contactForm" novalidate>
         <div class="form-field">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" required>
@@ -181,7 +181,22 @@
         <button type="submit" class="btn btn-primary">Send Inquiry</button>
         <p class="form-note">This form is front-end only — connect it to your email service or a form backend (e.g. Formspree) to receive submissions.</p>
         <p id="formStatus" role="status"></p>
-      </form>
+      </form> --><!-- Replace YOUR_DEPLOYED_URL with the URL you copied from Google Apps Script -->
+<form action="https://script.google.com/macros/s/AKfycby7xZGQAdoBsQdWuNzzFHmK2Uuzt8fKKCtdJZSqqMSHqQfymo3BkYIXmvtqj9M4Si9tpA/exec" method="POST">
+  <div class="form-field">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
+ </div>
+ <div class="form-field">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+</div>
+<div class="form-field">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required></textarea>
+ </div>
+    <button type="submit"class="btn btn-primary">Send Message</button>
+</form>
     </div>
   </div>
 </section>

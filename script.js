@@ -54,12 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const wash = item.querySelector('.wash');
       const cat = item.querySelector('.gallery-caption .cat');
       const title = item.querySelector('.gallery-caption .title');
-      // Copy whatever visual is on the small item's .wash (gradient today,
-      // a real photo later if .wash gets a background-image) onto the
-      // lightbox so this keeps working once real artwork is swapped in.
-      const computed = getComputedStyle(wash);
-      lightboxWash.style.backgroundImage = computed.backgroundImage;
-      lightboxWash.style.backgroundColor = computed.backgroundColor;
+      // Support both the current CSS-gradient placeholders (a <div class="wash">)
+      // and real photos (an <img class="wash" src="..."> once you swap them in).
+      if (wash.tagName === 'IMG') {
+        lightboxWash.style.backgroundImage = `url("${wash.currentSrc || wash.src}")`;
+        lightboxWash.style.backgroundColor = '';
+      } else {
+        const computed = getComputedStyle(wash);
+        lightboxWash.style.backgroundImage = computed.backgroundImage;
+        lightboxWash.style.backgroundColor = computed.backgroundColor;
+      }
       lightboxCat.textContent = cat ? cat.textContent : '';
       lightboxTitle.textContent = title ? title.textContent : '';
     }
