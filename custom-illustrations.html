@@ -39,6 +39,21 @@
   </div>
 </header>
 
+<section class="section" id="examples">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Recent Work</p>
+      <h2>A closer look</h2>
+      <p>A few illustration projects from past clients. Tap any piece to view it larger.</p>
+    </div>
+    <div class="gallery-grid category-gallery">
+      <div class="gallery-item" data-cat="illustration"><div class="wash"></div><div class="gallery-caption"><span class="cat">Illustration</span><span class="title">Save-the-Date Suite</span></div></div>
+      <div class="gallery-item" data-cat="illustration"><div class="wash"></div><div class="gallery-caption"><span class="cat">Illustration</span><span class="title">Venue Map, Hand-Inked</span></div></div>
+    </div>
+    <p class="gallery-note">Want to see more? <a href="index.html#gallery" style="text-decoration:underline;">View the full gallery →</a></p>
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <div class="section-head">
@@ -162,6 +177,20 @@
     </div>
   </div>
 </footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Artwork preview" hidden>
+  <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous artwork">&#8249;</button>
+  <div class="lightbox-frame">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">&times;</button>
+    <div class="lightbox-wash" id="lightboxWash"></div>
+    <div class="lightbox-caption">
+      <span class="cat" id="lightboxCat"></span>
+      <span class="title" id="lightboxTitle"></span>
+    </div>
+  </div>
+  <button class="lightbox-nav next" id="lightboxNext" aria-label="Next artwork">&#8250;</button>
+</div>
 
 <script src="script.js"></script>
 </body>

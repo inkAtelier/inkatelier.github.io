@@ -394,6 +394,11 @@ img.wash, img.banner{
 .gallery-note{
   text-align:center; margin-top:34px; font-size:13.5px; color:var(--olive);
 }
+.category-gallery{
+  grid-template-columns:repeat(2,1fr);
+  max-width:600px;
+  margin:0 auto;
+}
 
 /* ---------- lightbox (click a gallery piece to view it larger) ---------- */
 .lightbox{
