@@ -36,6 +36,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Gallery lightbox — click (or Enter/Space) a piece to view it larger
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox && galleryItems.length) {
+    const lightboxWash = document.getElementById('lightboxWash');
+    const lightboxCat = document.getElementById('lightboxCat');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const items = Array.from(galleryItems);
+    let currentIndex = 0;
+    let lastFocused = null;
+
+    function render(index) {
+      const item = items[index];
+      const wash = item.querySelector('.wash');
+      const cat = item.querySelector('.gallery-caption .cat');
+      const title = item.querySelector('.gallery-caption .title');
+      // Copy whatever visual is on the small item's .wash (gradient today,
+      // a real photo later if .wash gets a background-image) onto the
+      // lightbox so this keeps working once real artwork is swapped in.
+      const computed = getComputedStyle(wash);
+      lightboxWash.style.backgroundImage = computed.backgroundImage;
+      lightboxWash.style.backgroundColor = computed.backgroundColor;
+      lightboxCat.textContent = cat ? cat.textContent : '';
+      lightboxTitle.textContent = title ? title.textContent : '';
+    }
+
+    function open(index) {
+      currentIndex = index;
+      lastFocused = document.activeElement;
+      render(currentIndex);
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    }
+
+    function close() {
+      lightbox.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    function step(delta) {
+      currentIndex = (currentIndex + delta + items.length) % items.length;
+      render(currentIndex);
+    }
+
+    items.forEach((item, index) => {
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      const title = item.querySelector('.gallery-caption .title');
+      item.setAttribute('aria-label', 'View larger image: ' + (title ? title.textContent : 'artwork'));
+      item.addEventListener('click', () => open(index));
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(index);
+        }
+      });
+    });
+
+    lightboxClose.addEventListener('click', close);
+    lightboxPrev.addEventListener('click', () => step(-1));
+    lightboxNext.addEventListener('click', () => step(1));
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+  }
+
   // Contact form (front-end only — wire up to a form backend / email service to go live)
   const form = document.getElementById('contactForm');
   const status = document.getElementById('formStatus');
